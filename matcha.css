@@ -1,0 +1,136 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; /* Elimina el margen predeterminado del body */
+  padding: 0; /* Elimina el padding predeterminado del body */
+  overflow: hidden; /* Evita el scroll */
+}
+
+.contenedor {
+  position: relative; /* Permite posicionar los botones encima de la imagen */
+  width: 100%;
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  text-align: center;
+}
+
+.imagen-matcha {
+  width: 100%; /* Ocupa todo el ancho */
+  height: 100vh; /* Ocupa toda la altura de la pantalla */
+  object-fit: cover; /* Asegura que la imagen cubra toda la pantalla sin distorsionarse */
+  position: absolute; /* Coloca la imagen detrás de los botones */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Asegura que la imagen esté detrás de los botones */
+}
+
+.indicador-cariño {
+  position: absolute; /* Permite posicionar la barra de progreso */
+  z-index: 2; /* Asegura que la barra esté encima de la imagen */
+  width: 80%; /* Ancho de la barra de progreso */
+  max-width: 400px; /* Ancho máximo de la barra */
+  left: 50%; /* Centra horizontalmente */
+  transform: translateX(-50%); /* Ajusta el centrado horizontal */
+  background-color: #f0f0f0; /* Color de fondo de la barra */
+  border-radius: 20px; /* Bordes redondeados */
+  overflow: hidden; /* Oculta el contenido que sobresale */
+  bottom: 120px; /* 40px por encima de los botones (botones están a 60px del fondo) */
+}
+
+.barra-cariño {
+  width: 0%; /* Ancho inicial de la barra de progreso */
+  height: 30px; /* Altura de la barra */
+  background-color: red; /* Color de relleno de la barra */
+  border-radius: 20px; /* Bordes redondeados */
+  transition: width 0.5s ease; /* Animación suave al cambiar el ancho */
+  position: relative; /* Permite posicionar el texto dentro de la barra */
+}
+
+#nivel-cariño {
+  position: absolute; /* Posiciona el texto en el centro de la barra */
+  top: 50%; /* Alinea verticalmente */
+  left: 50%; /* Alinea horizontalmente */
+  transform: translate(-50%, -50%); /* Centra el texto */
+  color: black; /* Color del texto */
+  font-size: 16px; /* Tamaño del texto */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.botones {
+  position: absolute; /* Permite posicionar los botones en la parte inferior */
+  bottom: 60px; /* Sube los botones 40px desde su posición original (20px + 40px) */
+  left: 50%; /* Centra horizontalmente */
+  transform: translateX(-50%); /* Ajusta el centrado horizontal */
+  z-index: 2; /* Asegura que los botones estén encima de la imagen */
+  display: flex; /* Organiza los botones en una fila */
+  gap: 10px; /* Espacio entre los botones */
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3e8e41; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos para el textarea y el botón de publicar */
+textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#publicar-comentario {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  cursor: pointer;
+}
+
+#publicar-comentario:hover {
+  background-color: #3e8e41;
+}
+
+/* Estilos para el botón "Volver" */
+#boton-volver {
+  position: absolute; /* Posiciona el botón en la esquina superior izquierda */
+  top: 20px; /* Distancia desde la parte superior */
+  left: 20px; /* Distancia desde la izquierda */
+  z-index: 3; /* Asegura que el botón esté encima de la imagen */
+  padding: 10px 15px;
+  background-color: #f44336; /* Color de fondo del botón "Volver" */
+  color: white; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+}
+
+#boton-volver:hover {
+  background-color: #d32f2f; /* Cambia el color al pasar el mouse */
+}
+
+/* Estilos para la sección de comentarios */
+.seccion-comentarios {
+  margin-top: 40px;
+  position: relative;
+  z-index: 2;
+  background-color: transparent; /* Elimina el fondo semitransparente */
+  padding: 20px;
+  color: black; /* Color del texto */
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.7); /* Sombra para mejorar la legibilidad */
+}
+
+/* Estilos para la lista de comentarios */
+#lista-comentarios {
+  list-style: none;
+}

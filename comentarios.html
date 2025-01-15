@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Comentarios sobre Matcha</title>
+  <link rel="stylesheet" href="matcha.css"> <!-- Usa el mismo CSS -->
+</head>
+<body>
+  <div class="contenedor">
+    <!-- Fondo de la imagen del gato -->
+    <img src="matcha.jpeg" alt="Matcha" class="imagen-matcha">
+
+    <!-- Botón para retroceder a la página principal -->
+    <button id="boton-volver" onclick="volver()">Volver</button>
+
+    <!-- Área para escribir comentarios -->
+    <div class="seccion-comentarios">
+      <h2>Escribe un comentario sobre Matcha</h2>
+      <textarea id="nuevo-comentario" placeholder="Escribe tu comentario aquí..." rows="5"></textarea>
+      <div style="text-align: center;">
+        <button id="publicar-comentario" onclick="publicarComentario()">Publicar</button>
+        <div id="boton-guardar-container" style="margin-top: 10px;"></div>
+      </div>
+      <h2>Comentarios Anteriores</h2>
+      <ul id="lista-comentarios"></ul>
+    </div>
+  </div>
+
+  <script>
+    // Cargar comentarios guardados
+    var comentariosGuardados = localStorage.getItem("comentarios");
+    if (comentariosGuardados) {
+      var listaComentarios = document.getElementById("lista-comentarios");
+      comentariosGuardados.split(",").forEach(function(comentario) {
+        var nuevoComentario = document.createElement("li");
+        nuevoComentario.textContent = comentario;
+        nuevoComentario.onclick = function() {
+          var botonBorrar = document.createElement("button");
+          botonBorrar.textContent = "Borrar";
+          botonBorrar.style.background = "red";
+          botonBorrar.style.color = "white";
+          botonBorrar.onclick = function() {
+            borrarComentario(nuevoComentario);
+            nuevoComentario.removeChild(botonBorrar);
+          };
+          nuevoComentario.appendChild(botonBorrar);
+        };
+        listaComentarios.appendChild(nuevoComentario);
+      });
+    }
+
+    function volver() {
+      window.location.href = 'matcha.html'; // Cambia la URL según sea necesario
+    }
+
+    function publicarComentario() {
+      var comentario = document.getElementById("nuevo-comentario").value;
+      var listaComentarios = document.getElementById("lista-comentarios");
+      var nuevoComentario = document.createElement("li");
+      nuevoComentario.textContent = comentario;
+      nuevoComentario.onclick = function() {
+        var botonBorrar = document.createElement("button");
+        botonBorrar.textContent = "Borrar";
+        botonBorrar.style.background = "red";
+        botonBorrar.style.color = "white";
+        botonBorrar.onclick = function() {
+          borrarComentario(nuevoComentario);
+          nuevoComentario.removeChild(botonBorrar);
+        };
+        nuevoComentario.appendChild(botonBorrar);
+      };
+      listaComentarios.insertBefore(nuevoComentario, listaComentarios.firstChild);
+      document.getElementById("nuevo-comentario").value = "";
+
+      // Borrar comentarios antiguos si se llega a 50 comentarios
+      if (listaComentarios.children.length > 50) {
+        listaComentarios.removeChild(listaComentarios.lastChild);
+      }
+
+      // Mostrar botón de guardar
+      var botonGuardarContainer = document.getElementById("boton-guardar-container");
+      var botonGuardar = document.createElement("button");
+      botonGuardar.textContent = "Guardar";
+      botonGuardar.onclick = function() {
+        guardarComentarios();
+        botonGuardarContainer.removeChild(botonGuardar);
+      };
+      botonGuardarContainer.appendChild(botonGuardar);
+    }
+
+    function borrarComentario(comentario) {
+      var listaComentarios = document.getElementById("lista-comentarios");
+      listaComentarios.removeChild(comentario);
+      localStorage.setItem("comentarios", listaComentarios.innerHTML);
+    }
+
+    function guardarComentarios() {
+      var listaComentarios = document.getElementById("lista-comentarios");
+      var comentarios = [];
+      for (var i = 0; i < listaComentarios.children.length; i++) {
+        var comentario = listaComentarios.children[i].textContent;
+        if (comentario.indexOf("Fecha y hora") === -1) {
+          comentarios.push(comentario);
+        }
+      }
+      localStorage.setItem("comentarios", comentarios.join(","));
+      alert("Comentarios guardados con éxito!");
+    }
+  </script>
+</body>
+</html>
